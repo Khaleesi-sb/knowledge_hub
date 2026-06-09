@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 class TechAdapter(
     private val technologies: List<TechPojo>,
+    private val onItemClick: (TechPojo) -> Unit,
 ) : RecyclerView.Adapter<TechAdapter.TechViewHolder>() {
     class TechViewHolder(
         view: View,
@@ -31,7 +32,11 @@ class TechAdapter(
         holder: TechViewHolder,
         position: Int,
     ) {
-        holder.title.text = technologies[position].title
+        val technology = technologies[position]
+        holder.title.text = technology.title
+        holder.itemView.setOnClickListener {
+            onItemClick(technology)
+        }
     }
 
     override fun getItemCount(): Int = technologies.size

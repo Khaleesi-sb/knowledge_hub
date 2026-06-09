@@ -46,7 +46,14 @@ class SecondActivity : AppCompatActivity() {
             GridLayoutManager(this, 2)
 
         recyclerView.adapter =
-            TechAdapter(Constants.techList)
+            TechAdapter(Constants.techList) { technology ->
+                val intent = Intent(this, ThirdActivity::class.java)
+                intent.putExtra("title", technology.title)
+                intent.putExtra("description", technology.description)
+                intent.putExtra("imageUrl", technology.imageUrl)
+                intent.putExtra("url", technology.url)
+                startActivity(intent)
+            }
 
         val callBtn = findViewById<Button>(R.id.call_btn)
         callBtn.setOnClickListener {
